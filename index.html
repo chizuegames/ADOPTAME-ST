@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ff5708" />
+    <meta
+      name="description"
+      content="Adóptame: Modo Historia. Acompaña a la Fundación Corazón Peludito desde sus primeros días."
+    />
+    <title>Adóptame | Modo Historia</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="story" aria-live="polite">
+      <section class="scene scene--cover is-active" id="scene-cover" aria-labelledby="start-button">
+        <div class="scene__frame">
+          <img
+            class="scene__image"
+            src="Ptd.png"
+            alt="Portada de Adóptame con los animales frente a la fundación"
+          />
+
+          <div class="scene__action">
+            <button class="start-button" id="start-button" type="button">
+              <span>Inicia la aventura</span>
+              <span class="start-button__arrow" aria-hidden="true">▶</span>
+            </button>
+            <p class="audio-message" id="audio-message" role="status"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene scene--intro" id="scene-intro" aria-label="El comienzo de la fundación" hidden>
+        <div class="scene__frame">
+          <img
+            class="scene__image"
+            src="Ptd1.png"
+            alt="La primera sede de la fundación, todavía con pocos recursos"
+          />
+
+          <div class="story-text">
+            <p>
+              Nuestra fundación no siempre fue como la conocen hoy. Hubo un tiempo en el que apenas
+              teníamos lo necesario, pero también muchas ganas de ayudar.
+            </p>
+            <p>
+              Hoy queremos invitarlos a regresar con nosotros a esos primeros días y recorrer, paso a
+              paso, el camino que nos trajo hasta aquí.
+            </p>
+            <p>
+              Nuestra historia comenzará de la forma más sencilla: con una recepción, la sala de receso
+              y una sola habitación. Y para este primer capítulo, esa habitación será la sala de descanso.
+            </p>
+          </div>
+
+          <button class="music-button" id="music-button" type="button" aria-label="Silenciar música">
+            <span aria-hidden="true" id="music-icon">♫</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <audio id="background-music" preload="auto" loop>
+      <source src="Cozy%20Morning%20Routine.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="app.js"></script>
+  </body>
+</html>
