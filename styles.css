@@ -102,7 +102,7 @@ button {
 }
 
 .scene--intro {
-  --backdrop-image: url("Ptd1.png");
+  --backdrop-image: url("Ptd2.png");
   background: #f6f6f6;
   transition: opacity 500ms ease;
 }
@@ -177,17 +177,22 @@ button {
 
 .story-text {
   position: absolute;
-  right: max(7%, env(safe-area-inset-right));
-  bottom: max(2.8%, env(safe-area-inset-bottom));
-  left: max(7%, env(safe-area-inset-left));
-  max-height: 23.5%;
+  top: 5.3%;
+  right: 9.2%;
+  bottom: auto;
+  left: 9.2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 66%;
+  max-height: 66%;
   overflow: auto;
   padding: clamp(10px, 2.5vh, 22px) clamp(12px, 4vw, 30px);
   border: 3px solid #21130e;
   border-radius: 22px;
   box-shadow: 0 7px 0 rgba(33, 19, 14, 0.92);
   background: rgba(255, 255, 255, 0.9);
-  font-size: clamp(0.67rem, 1.62vh, 0.98rem);
+  font-size: clamp(0.72rem, 1.78vh, 1.02rem);
   font-weight: 700;
   line-height: 1.38;
   text-align: left;
@@ -204,8 +209,8 @@ button {
 
 .music-button {
   position: absolute;
-  top: max(16px, calc(env(safe-area-inset-top) + 8px));
-  right: max(16px, calc(env(safe-area-inset-right) + 8px));
+  top: 72.5%;
+  right: 3%;
   display: grid;
   place-items: center;
   width: 48px;
