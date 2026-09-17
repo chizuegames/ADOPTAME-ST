@@ -45,6 +45,14 @@ button {
   isolation: isolate;
 }
 
+.scene[hidden] {
+  display: none !important;
+}
+
+.scene:not(.is-active) {
+  pointer-events: none;
+}
+
 .scene::before {
   content: "";
   position: absolute;
