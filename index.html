@@ -14,7 +14,7 @@
         display: none !important;
       }
     </style>
-    <link rel="stylesheet" href="styles.css?v=3" />
+    <link rel="stylesheet" href="styles.css?v=4" />
   </head>
   <body>
     <main class="story" aria-live="polite">
@@ -64,12 +64,47 @@
           </button>
         </div>
       </section>
+
+      <section class="scene scene--game" id="scene-game" aria-label="Alexandra presenta la fundación" hidden>
+        <div class="scene__frame">
+          <img
+            class="scene__image"
+            src="PG1.png"
+            alt="Alexandra, fundadora de Corazón Peludito, junto a varios animales"
+          />
+
+          <div class="layout-zone zone-a" id="zone-a" data-zone="A" aria-label="Zona para imágenes"></div>
+
+          <div class="layout-zone zone-b" id="zone-b" data-zone="B" aria-label="Zona de diálogo">
+            <p id="game-dialogue"></p>
+          </div>
+
+          <div class="layout-zone zone-c" id="zone-c" data-zone="C" aria-label="Zona de adoptantes">
+            <div class="adopter-slot adopter-slot--1" data-position="D1" aria-label="Posición de adoptante 1"></div>
+            <div class="adopter-slot adopter-slot--2" data-position="D2" aria-label="Posición de adoptante 2"></div>
+            <div class="adopter-slot adopter-slot--3" data-position="D3" aria-label="Posición de adoptante 3"></div>
+            <div class="adopter-slot adopter-slot--4" data-position="D4" aria-label="Posición de adoptante 4"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="story-menu" id="story-menu" role="dialog" aria-modal="true" aria-labelledby="menu-title" hidden>
+        <div class="story-menu__panel">
+          <h2 id="menu-title">Menú de historia</h2>
+          <p>Solo puedes saltar a las partes que ya hayas recorrido.</p>
+          <div class="story-menu__parts" id="menu-parts">
+            <button type="button" data-part="0">Nuestros inicios</button>
+            <button type="button" data-part="1">Conoce a Alexandra</button>
+          </div>
+          <button class="story-menu__close" id="close-menu" type="button">Continuar</button>
+        </div>
+      </div>
     </main>
 
     <audio id="background-music" preload="auto" loop>
       <source src="Cozy%20Morning%20Routine.mp3" type="audio/mpeg" />
     </audio>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=2"></script>
   </body>
 </html>

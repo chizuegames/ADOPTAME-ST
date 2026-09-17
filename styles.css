@@ -33,6 +33,9 @@ button {
   width: 100%;
   min-height: 100svh;
   overflow: hidden;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .scene {
@@ -105,6 +108,12 @@ button {
   --backdrop-image: url("Ptd2.png");
   background: #f6f6f6;
   transition: opacity 500ms ease;
+}
+
+.scene--game {
+  --backdrop-image: url("PG1.png");
+  background: #fffbe4;
+  transition: opacity 450ms ease;
 }
 
 .scene--intro.is-entering {
@@ -192,7 +201,7 @@ button {
   border-radius: 22px;
   box-shadow: 0 7px 0 rgba(33, 19, 14, 0.92);
   background: rgba(255, 255, 255, 0.9);
-  font-size: clamp(0.72rem, 1.78vh, 1.02rem);
+  font-size: clamp(0.78rem, 1.88vh, 1.08rem);
   font-weight: 700;
   line-height: 1.38;
   text-align: left;
@@ -231,6 +240,129 @@ button {
 .music-button:active {
   transform: translateY(3px);
   box-shadow: 0 1px 0 #21130e;
+}
+
+.layout-zone {
+  position: absolute;
+  pointer-events: none;
+}
+
+.zone-a {
+  top: 7.9%;
+  left: 25.7%;
+  width: 48.4%;
+  height: 42.9%;
+}
+
+.zone-b {
+  top: 58.3%;
+  left: 8.2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84.7%;
+  height: 14.8%;
+  padding: 2.5% 5%;
+  color: #21130e;
+  font-size: clamp(0.8rem, 2vh, 1.08rem);
+  font-weight: 800;
+  line-height: 1.42;
+  text-align: center;
+}
+
+.zone-b p {
+  margin: 0;
+}
+
+.zone-c {
+  inset: 76.9% 0 0;
+}
+
+.adopter-slot {
+  position: absolute;
+  top: 22.8%;
+  width: 14.1%;
+  height: 53%;
+}
+
+.adopter-slot--1 {
+  left: 16.8%;
+}
+
+.adopter-slot--2 {
+  left: 34.2%;
+}
+
+.adopter-slot--3 {
+  left: 51.7%;
+}
+
+.adopter-slot--4 {
+  left: 69%;
+}
+
+.story-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(33, 19, 14, 0.72);
+  backdrop-filter: blur(7px);
+}
+
+.story-menu[hidden] {
+  display: none !important;
+}
+
+.story-menu__panel {
+  width: min(88vw, 430px);
+  padding: 24px;
+  border: 4px solid #21130e;
+  border-radius: 26px;
+  box-shadow: 0 9px 0 #21130e;
+  background: #fffdf4;
+  text-align: center;
+}
+
+.story-menu__panel h2 {
+  margin: 0 0 8px;
+  font-size: 1.55rem;
+}
+
+.story-menu__panel p {
+  margin: 0 0 18px;
+  line-height: 1.4;
+}
+
+.story-menu__parts {
+  display: grid;
+  gap: 10px;
+}
+
+.story-menu__parts button,
+.story-menu__close {
+  min-height: 48px;
+  padding: 10px 16px;
+  border: 3px solid #21130e;
+  border-radius: 14px;
+  background: #fff100;
+  color: #21130e;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.story-menu__parts button:disabled {
+  border-color: #99938f;
+  background: #dfddda;
+  color: #77716d;
+  cursor: not-allowed;
+}
+
+.story-menu__close {
+  margin-top: 18px;
+  background: #ff7825;
 }
 
 @keyframes scene-reveal {
