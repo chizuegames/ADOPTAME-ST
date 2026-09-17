@@ -9,18 +9,34 @@ const backgroundMusic = document.querySelector("#background-music");
 const story = document.querySelector(".story");
 const storyMenu = document.querySelector("#story-menu");
 const closeMenuButton = document.querySelector("#close-menu");
-const menuPartButtons = [...document.querySelectorAll("[data-part]")];
+const menuStepButtons = [...document.querySelectorAll("[data-step]")];
+const gameDialogue = document.querySelector("#game-dialogue");
 
 const MUSIC_VOLUME = 0.34;
 const TRANSITION_TIME = 450;
 const DOUBLE_TAP_DELAY = 300;
 const HOLD_DURATION = 650;
 const MOVE_TOLERANCE = 14;
-const storyParts = [introScene, gameScene];
+const storySteps = [
+  {
+    scene: introScene,
+    dialogue: "",
+  },
+  {
+    scene: gameScene,
+    dialogue:
+      "Hola de nuevo, amigos de los animales. Soy Alexandra, fundadora de la Fundación Corazón Peludito, y quiero invitarlos a conocer cómo comenzó todo.",
+  },
+  {
+    scene: gameScene,
+    dialogue:
+      "Antes de comenzar, un pequeño recordatorio: con un toque avanzamos y con dos retrocedemos. Si quieren abrir el menú, solo tienen que mantener pulsada la pantalla.",
+  },
+];
 let musicStarted = false;
 let adventureStarted = false;
-let currentPart = -1;
-let furthestPart = -1;
+let currentStep = -1;
+let furthestStep = -1;
 let tapTimer = null;
 let lastTapAt = 0;
 let holdTimer = null;
@@ -60,8 +76,8 @@ function showIntroScene() {
   coverScene.classList.add("is-leaving");
   introScene.hidden = false;
   introScene.classList.add("is-active", "is-entering");
-  currentPart = 0;
-  furthestPart = Math.max(furthestPart, currentPart);
+  currentStep = 0;
+  furthestStep = Math.max(furthestStep, currentStep);
   adventureStarted = true;
 
   window.setTimeout(() => {
@@ -71,44 +87,47 @@ function showIntroScene() {
   }, TRANSITION_TIME);
 }
 
-function showPart(nextPart) {
-  const targetPart = Math.max(0, Math.min(nextPart, storyParts.length - 1));
+function showStep(nextStep) {
+  const targetStep = Math.max(0, Math.min(nextStep, storySteps.length - 1));
 
-  if (!adventureStarted || targetPart === currentPart) {
+  if (!adventureStarted || targetStep === currentStep) {
     return;
   }
 
-  const previousScene = storyParts[currentPart];
-  const nextScene = storyParts[targetPart];
+  const previousScene = storySteps[currentStep].scene;
+  const nextScene = storySteps[targetStep].scene;
 
-  previousScene.classList.remove("is-active", "is-entering");
-  previousScene.hidden = true;
-  nextScene.hidden = false;
-  nextScene.classList.add("is-active", "is-entering");
+  if (previousScene !== nextScene) {
+    previousScene.classList.remove("is-active", "is-entering");
+    previousScene.hidden = true;
+    nextScene.hidden = false;
+    nextScene.classList.add("is-active", "is-entering");
 
-  window.setTimeout(() => nextScene.classList.remove("is-entering"), TRANSITION_TIME);
+    window.setTimeout(() => nextScene.classList.remove("is-entering"), TRANSITION_TIME);
+  }
 
-  currentPart = targetPart;
-  furthestPart = Math.max(furthestPart, currentPart);
+  gameDialogue.textContent = storySteps[targetStep].dialogue;
+  currentStep = targetStep;
+  furthestStep = Math.max(furthestStep, currentStep);
 }
 
-function nextPart() {
-  if (currentPart < storyParts.length - 1) {
-    showPart(currentPart + 1);
+function nextStep() {
+  if (currentStep < storySteps.length - 1) {
+    showStep(currentStep + 1);
   }
 }
 
-function previousPart() {
-  if (currentPart > 0) {
-    showPart(currentPart - 1);
+function previousStep() {
+  if (currentStep > 0) {
+    showStep(currentStep - 1);
   }
 }
 
 function updateMenu() {
-  menuPartButtons.forEach((button) => {
-    const part = Number(button.dataset.part);
-    button.disabled = part > furthestPart;
-    button.setAttribute("aria-current", part === currentPart ? "step" : "false");
+  menuStepButtons.forEach((button) => {
+    const step = Number(button.dataset.step);
+    button.disabled = step > furthestStep;
+    button.setAttribute("aria-current", step === currentStep ? "step" : "false");
   });
 }
 
@@ -192,13 +211,13 @@ story.addEventListener("pointerup", (event) => {
     window.clearTimeout(tapTimer);
     tapTimer = null;
     lastTapAt = 0;
-    previousPart();
+    previousStep();
     return;
   }
 
   window.clearTimeout(tapTimer);
   tapTimer = window.setTimeout(() => {
-    nextPart();
+    nextStep();
     tapTimer = null;
   }, DOUBLE_TAP_DELAY);
 });
@@ -216,11 +235,11 @@ story.addEventListener("contextmenu", (event) => {
 
 closeMenuButton.addEventListener("click", closeMenu);
 
-menuPartButtons.forEach((button) => {
+menuStepButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const part = Number(button.dataset.part);
-    if (part <= furthestPart) {
-      showPart(part);
+    const step = Number(button.dataset.step);
+    if (step <= furthestStep) {
+      showStep(step);
       closeMenu();
     }
   });
